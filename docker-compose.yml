@@ -1,0 +1,28 @@
+version: '3'
+services:
+  typescript:
+    image: "node:latest"
+    command: sh -c "cd /app/wwwroot && npx -p typescript tsc"
+    environment:
+      - NODE_ENV=development
+    working_dir: /app
+    volumes:
+      - ./:/app:cached
+      
+  blazor:
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0.100
+    command: sh -c "dotnet watch run"
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:8080
+    working_dir: /app
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app:cached
+      
+  generate_files:
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0.100
+    command: sh -c './linux.sh'
+    working_dir: /app/CodeGeneration
+    volumes:
+      - ./:/app:cached

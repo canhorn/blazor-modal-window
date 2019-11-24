@@ -1,0 +1,3 @@
+interface I[[EVENT_DATA_NAME]] {
+    [[EVENT_DATA_LIST]]
+}

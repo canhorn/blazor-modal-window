@@ -1,12 +1,14 @@
 /*
- * GENERATED_FILE: path/to/C#/ModelEvents.cs
- * This file should be generated from C# code.
+ * DO NOT EDIT! 
+ * GENERATED FILE!
+ * Generated From: Modal/ModalEvents.cs
+ * Generated To: wwwroot/ts/modal/modal.events.ts
  */
 
 /**
- * Model - Events
+ * Modal - Events
  */
-const modelEvents = {
+const modalEvents = {
     OPEN_WINDOW_EVENT_NAME: 'Model:OPEN_WINDOW:Event',
     CLOSE_WINDOW_EVENT_NAME: 'Model:CLOSE_WINDOW:Event',
     SEND_MESSAGE_TO_WINDOW_EVENT_NAME: 'Model:SEND_MESSAGE_TO_WINDOW:Event',
@@ -16,21 +18,25 @@ const modelEvents = {
 };
 
 /**
- * Model - Events Data
+ * Modal - Events Data
  */
 interface IModalOpenWindowEventData {
-    windowId: string;
+    windowId: string
+    context: string
 }
 interface IModalCloseWindowEventData {
-    windowId: string;
+    windowId: string
 }
 interface IModalSendMessageEventData {
-    windowId: string;
-    message: any;
+    windowId: string
+    message: any
 }
 interface IModalProcessChildMessageEventData {
-    windowId: string;
-    message: any;
+    windowId: string
 }
-interface IModalBeforeUnloadEventData {}
-interface IModalClosedWindowEventData {}
+interface IModalBeforeUnloadEventData {
+    windowId: string
+}
+interface IModalClosedWindowEventData {
+    windowId: string
+}

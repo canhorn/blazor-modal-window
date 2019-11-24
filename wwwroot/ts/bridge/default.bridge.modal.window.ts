@@ -4,12 +4,12 @@
         const { eventBus } = _window;
         setupOnMessage();
         eventBus.on(
-            modelWindowEvents.REGISTER_WINDOW_ID_EVENT_NAME,
+            modalWindowEvents.REGISTER_WINDOW_ID_EVENT_NAME,
             handleRegisterWindowId,
             this
         );
         eventBus.on(
-            modelWindowEvents.SEND_MESSAGE_TO_PARENT_WINDOW_EVENT_NAME,
+            modalWindowEvents.SEND_MESSAGE_TO_PARENT_WINDOW_EVENT_NAME,
             handleMessageToParentWindow,
             this
         );

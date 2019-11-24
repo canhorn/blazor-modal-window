@@ -1,6 +1,5 @@
 namespace blazor_modal_window.Modal
 {
-    // [GenerateOnClient]
     public class ModalWindowEvents
     {
         public static string REGISTER_WINDOW_ID_EVENT_NAME = "ModalWindow:REGISTER_WINDOW_ID:Event";
@@ -19,5 +18,7 @@ namespace blazor_modal_window.Modal
     }
     public struct ModalWindowProcessMessageEventData
     {
+        public string WindowId { get; set; }
+        public object Message { get; set; }
     }
 }

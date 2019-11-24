@@ -1,29 +1,30 @@
 /*
- * GENERATED_FILE: path/to/C#/ModelWindowEvents.cs
- * This file should be generated from C# code.
+ * DO NOT EDIT! 
+ * GENERATED FILE!
+ * Generated From: Modal/ModalWindowEvents.cs
+ * Generated To: wwwroot/ts/modal/modal.window.events.ts
  */
 
 /**
- * Model Window - Events
+ * ModalWindow - Events
  */
-const modelWindowEvents = {
+const modalWindowEvents = {
     REGISTER_WINDOW_ID_EVENT_NAME: 'ModalWindow:REGISTER_WINDOW_ID:Event',
-    SEND_MESSAGE_TO_PARENT_WINDOW_EVENT_NAME:
-        'ModalWindow:SEND_MESSAGE_TO_PARENT_WINDOW:Event',
+    SEND_MESSAGE_TO_PARENT_WINDOW_EVENT_NAME: 'ModalWindow:SEND_MESSAGE_TO_PARENT_WINDOW:Event',
     PROCESS_MESSAGE_EVENT_NAME: 'ModalWindow:PROCESS_MESSAGE:Event',
 };
 
 /**
- * Model Window - Events Data
+ * ModalWindow - Events Data
  */
 interface IModalWindowRegisterWindowIdEventData {
-    windowId: string;
+    windowId: string
 }
-interface IModalWindowSendMessageToParentEventData {
-    name: string;
-    data: any;
+interface IModalWindowSendMessageToParentWindowEventData {
+    name: string
+    data: any
 }
 interface IModalWindowProcessMessageEventData {
-    windowId: string;
-    message: any;
+    windowId: string
+    message: any
 }

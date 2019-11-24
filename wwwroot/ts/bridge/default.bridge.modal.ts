@@ -4,17 +4,17 @@
         const { eventBus } = _window;
         setupOnBeforeUnload();
         setupProcessChildMessage();
+        eventBus.on(modalEvents.OPEN_WINDOW_EVENT_NAME, handleOpenWindow, this);
         eventBus.on(
-            modelEvents.OPEN_WINDOW_EVENT_NAME,
-            handleOpenWindow,
-            this
-        );
-        eventBus.on(
-            modelEvents.CLOSE_WINDOW_EVENT_NAME,
+            modalEvents.CLOSE_WINDOW_EVENT_NAME,
             handleCloseWindow,
             this
         );
-        eventBus.on(modelEvents.SEND_MESSAGE_TO_WINDOW_EVENT_NAME, sendMessageToWindow, this);
+        eventBus.on(
+            modalEvents.SEND_MESSAGE_TO_WINDOW_EVENT_NAME,
+            sendMessageToWindow,
+            this
+        );
     };
 
     const handleOpenWindow = ({ windowId, context }) => {
@@ -30,7 +30,7 @@
                 console.log('unload', { windowId, openWindows });
                 delete openWindows[windowId];
                 eventBus.publish(
-                    createEvent(modelEvents.CLOSED_WINDOW, {
+                    createEvent(modalEvents.CLOSED_WINDOW, {
                         windowId,
                     })
                 );
@@ -46,7 +46,10 @@
         openWindows[windowId].close();
     };
 
-    const sendMessageToWindow = ({ windowId, message }: IModalSendMessageEventData) => {
+    const sendMessageToWindow = ({
+        windowId,
+        message,
+    }: IModalSendMessageEventData) => {
         if (!openWindows[windowId]) {
             return;
         }
@@ -67,7 +70,7 @@
             console.log('setupOnBeforeUnload.beforeunload');
             const { eventBus } = _window;
             eventBus.publish(
-                createEvent(modelEvents.BEFORE_UNLOAD_EVENT_NAME, {})
+                createEvent(modalEvents.BEFORE_UNLOAD_EVENT_NAME, {})
             );
             for (const key in openWindows) {
                 if (openWindows.hasOwnProperty(key)) {

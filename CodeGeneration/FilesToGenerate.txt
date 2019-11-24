@@ -1,0 +1,3 @@
+# [[Location to parse]] : [[Location to put generated file]]
+../Modal/ModalEvents.cs : ../wwwroot/ts/modal/modal.events.ts
+../Modal/ModalWindowEvents.cs : ../wwwroot/ts/modal/modal.window.events.ts

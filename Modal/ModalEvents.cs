@@ -1,6 +1,5 @@
 namespace blazor_modal_window.Modal
 {
-    // [GenerateOnClient]
     public class ModalEvents
     {
         public static string OPEN_WINDOW_EVENT_NAME = "Model:OPEN_WINDOW:Event";
@@ -33,7 +32,7 @@ namespace blazor_modal_window.Modal
     {
         public string WindowId { get; set; }
     }
-    public class ModalClosedWindowEventData
+    public struct ModalClosedWindowEventData
     {
         public string WindowId { get; set; }
     }
