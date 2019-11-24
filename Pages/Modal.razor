@@ -1,0 +1,121 @@
+﻿@page "/Modal/{WindowId}"
+@layout ModalLayout
+@using blazor_modal_window.Modal
+@using blazor_modal_window.ClientBus.Model
+@using Microsoft.AspNetCore.WebUtilities
+
+<h1>Modal</h1>
+
+<button @onclick="PingParent">
+    Ping Parent
+</button>
+
+<button @onclick="CloseWindow">
+    Close Window
+</button>
+
+<RegisterJavaScriptCallback 
+    EventName="*" 
+    Trigger="HandleEventTrigger" 
+/>
+
+@foreach (var message in _messages.Reverse())
+{
+    <div>@message</div>
+}
+
+@code 
+{
+    [Parameter]
+    public string WindowId { get; set; }
+    [Parameter]
+    public string Context { get; set; }
+    [Inject]
+    private ClientEventBus EventBus { get; set; }
+    [Inject]
+    private NavigationManager navigationManager { get; set; }
+
+    private IList<string> _messages { get; set; } = new List<string>();
+
+    public Task HandleEventTrigger(
+        ClientEvent clientEvent
+    ) 
+    {
+        Console.WriteLine("Trigger For * Hit");
+        _messages.Add(clientEvent.Name);
+
+        return Task.CompletedTask;
+    }
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = navigationManager.ToAbsoluteUri(
+            navigationManager.Uri
+        );
+        if (QueryHelpers.ParseQuery(
+                uri.Query
+            ).TryGetValue(
+                "context", 
+                out var context
+            )
+        )
+        {
+            Context = context.First();
+        }
+
+        Console.WriteLine(
+            "Window: {0} | Context: {1}", 
+            WindowId, 
+            Context
+        );
+        await EventBus.Publish(
+            new StandardClientEvent(
+                ModalWindowEvents.REGISTER_WINDOW_ID_EVENT_NAME, 
+                new ModalWindowRegisterWindowIdEventData
+                {
+                    WindowId = WindowId 
+                }
+            )
+        );
+    }
+
+    private async Task PingParent() 
+    {
+        await SendMessageToParent(
+            "PING",
+            new 
+            {
+                WindowId,
+            }
+        );
+    }
+
+    private async Task CloseWindow() 
+    {
+        await SendMessageToParent(
+            ModalEvents.CLOSE_WINDOW_EVENT_NAME, 
+            new 
+            { 
+                WindowId,
+            }
+        );
+    }
+
+    private async Task SendMessageToParent(
+        string name, 
+        object data
+    ) 
+    {
+        await EventBus.Publish(
+            new StandardClientEvent(
+                ModalWindowEvents.SEND_MESSAGE_TO_PARENT_WINDOW_EVENT_NAME, 
+                new ModalWindowSendMessageToParentWindowEventData
+                {
+                   Name = name,
+                   Data = data,
+                }
+            )
+        );
+    }
+}

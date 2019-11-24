@@ -1,0 +1,137 @@
+﻿@page "/editor"
+@implements IDisposable
+@using blazor_modal_window.Modal;
+@using blazor_modal_window.ClientBus.Model;
+
+<h1>Editor</h1>
+
+<button @onclick="OpenWindow" >
+    Open Window
+</button>
+
+@foreach (var windowId in _windowIdList)
+{
+    <div>
+        <div>@windowId</div>
+        <button @onclick="() => CloseWindow(windowId)" >
+            Close Window
+        </button>
+
+        <button @onclick="() => PingWindow(windowId)" >
+            Ping Window
+        </button>
+    </div>   
+}
+<RegisterJavaScriptCallback 
+    EventName="Model:CLOSED_WINDOW:Event" 
+    Trigger="HandleClosedWindow" 
+/>
+<RegisterJavaScriptCallback 
+    EventName="*" 
+    Trigger="HandleEventTrigger" 
+/>
+
+@foreach (var message in _messages.Reverse())
+{
+    <div>@message</div>
+}
+
+@code 
+{
+    [Inject]
+    ClientEventBus EventBus { get; set; }
+
+    private IList<string> _windowIdList = new List<string>();
+
+    private IList<string> _messages { get; set; } = new List<string>();
+    public Task HandleEventTrigger(
+        ClientEvent clientEvent
+    ) 
+    {
+        Console.WriteLine("Trigger For * Hit");
+        _messages.Add(clientEvent.Name);
+
+        return Task.CompletedTask;
+    }
+    
+    public void Dispose()
+    {
+        foreach (var windowId in _windowIdList.ToList())
+        {
+            CloseWindow(
+                windowId
+            ).ConfigureAwait(false);
+        }
+    }
+
+    public Task HandleClosedWindow(
+        ClientEvent clientEvent
+    ) 
+    {
+        var data = clientEvent.CastData<ModalClosedWindowEventData>();
+        Console.WriteLine("Window to close: " + data.WindowId);
+        _windowIdList = _windowIdList.Where(
+            id => id != data.WindowId
+        ).ToList().AsReadOnly();
+
+        return Task.CompletedTask;
+    }
+
+    private async Task CloseWindow(string windowId) 
+    {
+        await EventBus.Publish(
+            new StandardClientEvent(
+                ModalEvents.CLOSE_WINDOW_EVENT_NAME, 
+                new ModalCloseWindowEventData
+                {
+                    WindowId = windowId 
+                }
+            )
+        );
+
+        _windowIdList = _windowIdList.Where(
+            id => id != windowId
+        ).ToList().AsReadOnly();
+    }
+    
+    private async Task OpenWindow() 
+    {
+        var windowId = Guid.NewGuid().ToString();
+        await EventBus.Publish(
+            new StandardClientEvent(
+                ModalEvents.OPEN_WINDOW_EVENT_NAME, 
+                new ModalOpenWindowEventData
+                {
+                    WindowId = windowId,
+                    Context = "/Content/<GUID>"
+                }
+            )
+        );
+        var newList = _windowIdList.ToList();
+        newList.Add(windowId);
+        _windowIdList = newList.AsReadOnly();
+    }
+    
+    private async Task PingWindow(
+        string windowId
+    ) 
+    {
+        if (windowId == null) 
+        {
+            return;
+        }
+        await EventBus.Publish(
+            new StandardClientEvent(
+                ModalEvents.SEND_MESSAGE_TO_WINDOW_EVENT_NAME, 
+                new ModalSendMessageEventData
+                {
+                    WindowId = windowId,
+                    Message = new StandardClientEvent(
+                        "PING",
+                        null
+                    )
+                }
+            )
+        );
+    }
+}

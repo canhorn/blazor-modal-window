@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>blazor-modal-window</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <app>Loading...</app>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="js/dist/application/start-event.js"></script>
+    <script src="js/dist/event/event-bus.js"></script>
+    <script src="js/dist/event/dotnet-event-bus.js"></script>
+    <script src="js/dist/core.js"></script>
+    <script src="js/dist/application/application.js"></script>
+    <script src="js/dist/modal/modal.events.js"></script>
+    <script src="js/dist/modal/modal.window.events.js"></script>
+
+    <script src="js/dist/modal/modal.js"></script>
+    <script src="js/dist/modal/modal.window.js"></script>
+    
+    <script src="js/dist/bridge/default.bridge.modal.js"></script>
+    <script src="js/dist/bridge/default.bridge.modal.window.js"></script>
+    <script>
+        window.core.start();
+    </script>
+</body>
+
+</html>

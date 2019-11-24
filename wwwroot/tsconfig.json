@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "sourceRoot": "/ts",
+        "outDir": "js/dist",
+        "target": "es2015",
+        "module": "es2015",
+        "sourceMap": true,
+        "watch": true
+    }
+}

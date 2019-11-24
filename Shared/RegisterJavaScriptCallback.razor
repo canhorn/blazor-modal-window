@@ -1,0 +1,50 @@
+@using blazor_modal_window.ClientBus.Model;
+@implements IDisposable
+
+@code {
+    [Parameter] 
+    public string EventName { get; set; }
+    [Parameter] 
+    public EventCallback<ClientEvent> Trigger { get; set; }
+
+    [Inject]
+    IJSRuntime jsRuntime { get; set; }
+
+    private object _listener;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _listener = new  
+        {
+            EventName,
+            Instance = DotNetObjectReference.Create(this),
+            Method = "HandlePublish",
+        };
+        await jsRuntime.InvokeVoidAsync(
+            "dotNetEventBus.on", 
+            _listener
+        );
+    }
+
+    public void Dispose() 
+    {
+        jsRuntime.InvokeVoidAsync(
+            "dotNetEventBus.off", 
+            _listener
+        ).ConfigureAwait(false);
+    }
+            
+    [JSInvokable]
+    public async Task HandlePublish(
+        ClientEventDto clientEvent
+    )
+    {
+        Console.WriteLine(
+            "Trigger Hit For: {0} | {1}", 
+            clientEvent.Name, 
+            EventName
+        );
+
+        await Trigger.InvokeAsync(clientEvent);
+    }
+}
