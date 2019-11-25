@@ -26,7 +26,7 @@ The Electron application will log to the root folder, electron-app/src/app.log i
 
 Supports multiple ways to develop, preferred way is using Docker.
 Using Docker will deploy the current directory in containers and run TypeScript compile and .NET Core deployment, website will be available on the Docker host port of 8080.
-Using the base up command will create the TypeScript and Electron generated file once, it will not rerun on changes. Us the command below to rebuild the generated files.
+Using the base up command will create the TypeScript and Electron generated file once, it will not rerun on changes. Use the command ***docker-compose up generate_files*** below to rebuild the generated files.
 
 ~~~ bash
 # TypeScript Compile and .NET Core Run
