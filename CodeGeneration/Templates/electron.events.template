@@ -1,0 +1,18 @@
+/*
+ * DO NOT EDIT! 
+ * GENERATED FILE!
+ * Generated From: [[GENERATED_FROM_FILE_LOCATION]]
+ * Generated To: [[GENERATED_TO_FILE_LOCATION]]
+ */
+
+/**
+ * [[MODULE_NAME]] - Events
+ */
+export const [[MODULE_NAME_LOWERCASE]]Events = {
+    [[EVENT_LIST]]
+};
+
+/**
+ * [[MODULE_NAME]] - Events Data
+ */
+[[EVENT_DATA_LIST]]

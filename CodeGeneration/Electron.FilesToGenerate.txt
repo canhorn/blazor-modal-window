@@ -1,0 +1,4 @@
+# [[Location to parse]] : [[Location to put generated file]]
+../Modal/ModalEvents.cs : ../electron-app/src/generated/modal/modal.events.ts
+../Modal/ModalWindowEvents.cs : ../electron-app/src/generated/modal/modal.window.events.ts
+../Modal/ElectronModalEvents.cs : ../electron-app/src/generated/modal/electron.modal.events.ts

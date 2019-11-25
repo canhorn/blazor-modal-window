@@ -49,7 +49,7 @@
     const sendMessageToWindow = ({
         windowId,
         message,
-    }: IModalSendMessageEventData) => {
+    }: IModalSendMessageToWindowEventData) => {
         if (!openWindows[windowId]) {
             return;
         }

@@ -123,7 +123,7 @@
         await EventBus.Publish(
             new StandardClientEvent(
                 ModalEvents.SEND_MESSAGE_TO_WINDOW_EVENT_NAME, 
-                new ModalSendMessageEventData
+                new ModalSendMessageToWindowEventData
                 {
                     WindowId = windowId,
                     Message = new StandardClientEvent(

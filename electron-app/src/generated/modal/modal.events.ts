@@ -2,13 +2,13 @@
  * DO NOT EDIT! 
  * GENERATED FILE!
  * Generated From: Modal/ModalEvents.cs
- * Generated To: wwwroot/ts/modal/modal.events.ts
+ * Generated To: electron-app/src/generated/modal/modal.events.ts
  */
 
 /**
  * Modal - Events
  */
-const modalEvents = {
+export const modalEvents = {
     OPEN_WINDOW_EVENT_NAME: 'Model:OPEN_WINDOW:Event',
     CLOSE_WINDOW_EVENT_NAME: 'Model:CLOSE_WINDOW:Event',
     SEND_MESSAGE_TO_WINDOW_EVENT_NAME: 'Model:SEND_MESSAGE_TO_WINDOW:Event',
@@ -20,23 +20,23 @@ const modalEvents = {
 /**
  * Modal - Events Data
  */
-interface IModalOpenWindowEventData {
+export interface IModalOpenWindowEventData {
     windowId: string
     context: string
 }
-interface IModalCloseWindowEventData {
+export interface IModalCloseWindowEventData {
     windowId: string
 }
-interface IModalSendMessageToWindowEventData {
+export interface IModalSendMessageToWindowEventData {
     windowId: string
     message: any
 }
-interface IModalProcessChildMessageEventData {
+export interface IModalProcessChildMessageEventData {
     windowId: string
 }
-interface IModalBeforeUnloadEventData {
+export interface IModalBeforeUnloadEventData {
     windowId: string
 }
-interface IModalClosedWindowEventData {
+export interface IModalClosedWindowEventData {
     windowId: string
 }

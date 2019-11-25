@@ -19,7 +19,7 @@ namespace blazor_modal_window.Modal
     {
         public string WindowId { get; set; }
     }
-    public struct ModalSendMessageEventData
+    public struct ModalSendMessageToWindowEventData
     {
         public string WindowId { get; set; }
         public object Message { get; set; }

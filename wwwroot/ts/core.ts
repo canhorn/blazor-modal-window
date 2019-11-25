@@ -1,5 +1,5 @@
 const DEFAULT_BRIDGE_MODE = 'DEFAULT';
-((_window: any) => {
+((_window: Window) => {
     _window.core = {
         start: () => {
             _window.eventBus.publish(
@@ -10,3 +10,12 @@ const DEFAULT_BRIDGE_MODE = 'DEFAULT';
         },
     };
 })(window);
+
+interface Window {
+    core: ICore;
+    bridgeMode: typeof DEFAULT_BRIDGE_MODE | string;
+}
+
+interface ICore {
+    start: () => void;
+}

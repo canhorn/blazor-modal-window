@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "sourceMap": true,
+        "watch": true
+    },
+    "include": [
+        "./**/*",
+        "../../wwwroot/js/dist/**/*.d.ts",
+    ],
+}

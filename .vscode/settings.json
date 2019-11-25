@@ -1,0 +1,17 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/src/**/*.js": true,
+        "**/src/**/*.js.map": true,
+        "**/dist/**/*.js": true,
+        "**/dist/**/*.js.map": true,
+        "**/electron-app/**/*.js": true,
+        "**/electron-app/**/*.js.map": true,
+        "**/electron-app/src/**/*.js": true,
+        "**/electron-app/src/**/*.js.map": true
+    }
+}

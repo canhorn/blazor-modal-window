@@ -8,6 +8,24 @@ services:
     working_dir: /app
     volumes:
       - ./:/app:cached
+
+  electron_client_typescript:
+    image: "node:latest"
+    command: sh -c "cd /app/electron-app/client && npx -p typescript tsc"
+    environment:
+      - NODE_ENV=development
+    working_dir: /app
+    volumes:
+      - ./:/app:cached
+
+  electron_host_typescript:
+    image: "node:latest"
+    command: sh -c "cd /app/electron-app/src && npx -p typescript tsc"
+    environment:
+      - NODE_ENV=development
+    working_dir: /app
+    volumes:
+      - ./:/app:cached
       
   blazor:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0.100
