@@ -72,15 +72,6 @@ Some URLs to check available version of ASP.NET and .NET Core SDK docker version
 
 # Change Log
 
-Electron Application
-Added bridge/client logic for Blazor to Electron communication.
-Electron is implemented with TypeScript.
-Electron uses nodemon to restart application on changes.
-Created Electron/Node based Event File generation.
-Fixed name of Modal Event Data file.
-Added declaration generation to Blazor supplied JavaScript.
-Created Electron Client/Host TypeScript compiling.
-
 > ## **11.24.2019**
 >
 > **Electron Application**
